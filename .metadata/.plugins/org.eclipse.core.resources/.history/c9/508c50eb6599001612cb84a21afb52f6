@@ -1,0 +1,21 @@
+package ayaschxml;
+
+public class RouteCalculator {
+	
+	Map map;
+	GameConfig gameConfig;
+	Route route = null;
+	/**
+	 * @param map
+	 * @param gameConfig
+	 */
+	public RouteCalculator(Map map, GameConfig gameConfig) {
+		this.map = map;
+		this.gameConfig = gameConfig;
+	}
+	
+	
+	
+	
+
+}

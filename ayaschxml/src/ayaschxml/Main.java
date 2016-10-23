@@ -11,32 +11,31 @@ public class Main {
 
 		Map map = new Map();
 		map = Parser.parseXML(new File("map.xml"));
+		ArrayList<GameConfig> gameConfigArray = new ArrayList<>();
 		
 		try {
-		 FileReader fr = new FileReader("config1.txt");
+			GameConfig gameconfig = new GameConfig();
+			FileReader fr = new FileReader("config1.txt");
 		    BufferedReader br = new BufferedReader(fr);
 
-		    int start = Integer.parseInt(br.readLine());
-		    System.out.println(start);
+		    gameconfig.setStart(Integer.parseInt(br.readLine())-1);
 		    
 		    String line;
 		    ArrayList<String> findingObjects = new ArrayList<>();
 		    while((line = br.readLine()) != null) {
 		    	findingObjects.add(line);
 		    }
+		    
+		    gameconfig.setFindingObjects(findingObjects);
+		    gameConfigArray.add(gameconfig);	    
 		    br.close();
 		    
-		    for (int i = 0; i < findingObjects.size(); i++) {
-				System.out.println(findingObjects.get(i));
-			}
 		    
+		   RouteCalculator routeCalculator = new RouteCalculator(map, gameconfig);
+		   		    
 		} catch(Exception e) {
 			
-		}
-		
-		
-		
-		
+		}		
 	
 	}
 
