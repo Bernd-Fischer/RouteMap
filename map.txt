@@ -1,0 +1,31 @@
+package ayaschxml;
+
+import java.util.ArrayList;
+
+public class Map {
+	
+	private ArrayList<Room> roomArrayList;
+
+	public Map() {
+		this.roomArrayList = null;
+	}
+
+	/**
+	 * @return the room
+	 */
+	public ArrayList<Room> getRoom() {
+		return roomArrayList;
+	}
+
+	/**
+	 * @param room the room to set
+	 */
+	public void setRoom(ArrayList<Room> room) {
+		this.roomArrayList = room;
+	}
+	
+	public void pushRoom(Room room) {
+		this.roomArrayList.add(room);
+	}
+
+}
