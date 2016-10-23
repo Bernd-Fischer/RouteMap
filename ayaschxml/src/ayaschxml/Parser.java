@@ -13,7 +13,7 @@ import org.w3c.dom.NodeList;
 
 public class Parser {
 
-	public Map parseXML(File xmlFile) {
+	public static Map parseXML(File xmlFile) {
 		
 		Map map = new Map();
 	
@@ -24,37 +24,59 @@ public class Parser {
 
 			doc.getDocumentElement().normalize();
 
-			NodeList nList = doc.getElementsByTagName("room");
+			NodeList roomList = doc.getElementsByTagName("room");
 			
-			for (int temp = 0; temp < nList.getLength(); temp++) {
+			ArrayList<Room> roomArrayList = new ArrayList<>();
+			
+			for (int temp = 0; temp < roomList.getLength(); temp++) {
 				Room room = new Room();
 				
-				Node nNode = nList.item(temp);
-				System.out.println("\nCurrent Element: " + nNode.getNodeName());
+				Node nNode = roomList.item(temp);
+				
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 					Element eElement = (Element) nNode;
-//
-//					 System.out.println("Room id : " +
-//					 eElement.getAttribute("id"));
-//					 System.out.println("Name : " +
-//					 eElement.getAttribute("name"));
-					// System.out.println("Name : " + eElement.get));
-					// System.out.println("Last Name : " +
-					// eElement.getElementsByTagName("lastname").item(0).getTextContent());
-					// System.out.println("Nick Name : " +
-					// eElement.getElementsByTagName("nickname").item(0).getTextContent());
-					// System.out.println("Salary : " +
-					// eElement.getElementsByTagName("salary").item(0).getTextContent());
-					 
-					 
+					
+					room.setId(Integer.parseInt(eElement.getAttribute("id")));
+					
+					room.setName(eElement.getAttribute("name"));
+					
+					int[] direction = {
+						0 , 0 , 0, 0
+					};
+					
+					if (eElement.getAttribute("west") != "") {
+						direction[0] = Integer.parseInt(eElement.getAttribute("west"));
+					}
+					if (eElement.getAttribute("south") != "") {
+						direction[1] = Integer.parseInt(eElement.getAttribute("south"));
+					}
+					if (eElement.getAttribute("east") != "") {
+						direction[2] = Integer.parseInt(eElement.getAttribute("east"));
+					}
+					if (eElement.getAttribute("north") != "") {
+						direction[3] = Integer.parseInt(eElement.getAttribute("north"));
+					}
+				
+					room.setDirection(direction);
+
+					NodeList objectList = eElement.getElementsByTagName("object");
+					if (objectList != null) {
+						for (int i = 0; i < objectList.getLength(); i++) {
+							Node objectNode = objectList.item(i);
+							Element objectElement = (Element) objectNode;
+							room.pushObject(objectElement.getAttribute("name"));								
+						}	
+					}
+					roomArrayList.add(room);					 
 				}
 			}
+			map.setRoom(roomArrayList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return map;
 	}
 
 }

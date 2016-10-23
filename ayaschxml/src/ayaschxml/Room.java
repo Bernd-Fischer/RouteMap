@@ -14,7 +14,7 @@ public class Room {
 	 * 3 = north
 	 */
 	private int[] direction = { 0, 0, 0, 0,};
-	private ArrayList<String> object = null;
+	private ArrayList<String> object = new ArrayList<>();
 	
 	public Room() {	
 	}
@@ -70,6 +70,10 @@ public class Room {
 	 */
 	public void setObject(ArrayList<String> object) {
 		this.object = object;
+	}
+	
+	public void pushObject(String object) {
+		this.object.add(object);
 	}
 	
 	

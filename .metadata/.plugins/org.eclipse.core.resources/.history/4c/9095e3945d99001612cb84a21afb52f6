@@ -1,0 +1,16 @@
+package ayaschxml;
+
+import java.io.File;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		Map map = new Map();
+		map = Parser.parseXML(new File("map.xml"));
+		System.out.println(map.getRoom().get(0).getName());
+		
+	
+	}
+
+}

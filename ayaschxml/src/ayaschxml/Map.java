@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 public class Map {
 	
-	private ArrayList<Room> roomArrayList;
+	private ArrayList<Room> roomArrayList = new ArrayList<>();
 
 	public Map() {
-		this.roomArrayList = null;
 	}
 
 	/**
@@ -23,9 +22,4 @@ public class Map {
 	public void setRoom(ArrayList<Room> room) {
 		this.roomArrayList = room;
 	}
-	
-	public void pushRoom(Room room) {
-		this.roomArrayList.add(room);
-	}
-
 }
